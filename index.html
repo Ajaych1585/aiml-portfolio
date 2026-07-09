@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ajay Kumar Chavvakula — AIML-500 Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-deep:#EEE8DA;
+    --ink:#20262B;
+    --ink-soft:#5B6470;
+    --teal:#2F5D62;
+    --teal-deep:#1E3E42;
+    --mustard:#C99A3B;
+    --line:#DAD3C2;
+    --card:#FFFFFF;
+    --pending:#B9B2A0;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(47,93,98,0.045) 28px),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  a{color:var(--teal-deep);}
+
+  /* ---------- Header ---------- */
+  .masthead{
+    padding:56px 32px 40px;
+    max-width:1180px;
+    margin:0 auto;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin:0 0 14px;
+  }
+  .masthead h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(34px,5vw,54px);
+    line-height:1.05;
+    margin:0 0 12px;
+    color:var(--ink);
+  }
+  .masthead .role{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:19px;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 28px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .meta-row span strong{color:var(--ink); font-weight:500;}
+
+  .purpose{
+    max-width:1180px;
+    margin:34px auto 0;
+    padding:0 32px 0;
+    font-size:16.5px;
+    color:var(--ink-soft);
+    max-width:760px;
+  }
+  .purpose strong{color:var(--ink);}
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:0;
+    padding:48px 32px 100px;
+  }
+  nav.index{
+    position:sticky;
+    top:28px;
+    align-self:start;
+    padding-right:28px;
+    border-right:1px solid var(--line);
+  }
+  .index-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--pending);
+    margin:0 0 18px;
+  }
+  .tab{
+    display:block;
+    text-decoration:none;
+    padding:14px 16px;
+    margin-bottom:10px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    background:var(--card);
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .tab:hover{transform:translateX(3px); border-color:var(--teal);}
+  .tab .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--teal);
+    letter-spacing:.08em;
+  }
+  .tab .name{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:15.5px;
+    color:var(--ink);
+    margin-top:3px;
+  }
+  .tab.active{border-color:var(--teal); box-shadow:2px 2px 0 var(--teal);}
+  .tab.pending{opacity:.6; border-style:dashed;}
+  .tab.pending .num{color:var(--pending);}
+  .tab.pending .name{color:var(--ink-soft);}
+  .tab .status{
+    display:inline-block;
+    margin-top:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:2px 7px;
+    border-radius:2px;
+  }
+  .tab.active .status{background:var(--teal); color:#fff;}
+  .tab.pending .status{background:transparent; border:1px solid var(--pending); color:var(--pending);}
+
+  main.entries{padding-left:44px;}
+
+  .entry{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:40px 44px;
+    margin-bottom:36px;
+    position:relative;
+  }
+  .entry::before{
+    content:attr(data-tag);
+    position:absolute;
+    top:-13px;
+    left:40px;
+    background:var(--teal);
+    color:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:4px 12px;
+    border-radius:2px;
+  }
+  .entry h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:30px;
+    margin:10px 0 6px;
+  }
+  .entry .subline{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-bottom:22px;
+    letter-spacing:.02em;
+  }
+  .entry p{color:var(--ink-soft); font-size:15.5px;}
+  .entry p strong{color:var(--ink);}
+
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin:26px 0 30px;
+  }
+  .step{
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:12px 10px;
+    background:var(--paper);
+  }
+  .step .k{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--mustard);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .step .v{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:14.5px;
+    margin-top:4px;
+  }
+
+  .demo-frame{
+    margin:28px 0;
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .demo-label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 16px;
+    background:var(--teal-deep);
+    color:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:#7ED0A8;display:inline-block;}
+  .demo-frame iframe{
+    width:100%;
+    height:640px;
+    border:none;
+    display:block;
+    background:#fff;
+  }
+
+  blockquote{
+    margin:26px 0;
+    padding:18px 22px;
+    border-left:3px solid var(--mustard);
+    background:var(--paper-deep);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:16px;
+    color:var(--ink);
+  }
+
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin:18px 0;}
+  .tags span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    padding:4px 10px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    color:var(--ink-soft);
+  }
+
+  .pending-entry{
+    padding:40px 44px;
+    border:1px dashed var(--line);
+    border-radius:3px;
+    color:var(--pending);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    text-align:center;
+    margin-bottom:20px;
+  }
+
+  footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:30px 32px 60px;
+    border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* ---------- Bio / Value Proposition ---------- */
+  .intro-grid{
+    max-width:1180px;
+    margin:34px auto 0;
+    padding:0 32px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+  .intro-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:28px 30px;
+  }
+  .intro-card .index-label{margin-bottom:12px;}
+  .intro-card p{color:var(--ink-soft); font-size:15px; margin:0 0 12px;}
+  .intro-card p:last-child{margin-bottom:0;}
+  .intro-card .highlight{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:17px;
+    color:var(--ink);
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .chip-row span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    padding:4px 10px;
+    border-radius:999px;
+    background:var(--paper-deep);
+    color:var(--teal-deep);
+  }
+
+  /* ---------- Artifact template fields ---------- */
+  .field{margin:26px 0;}
+  .field .flabel{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--mustard);
+    margin-bottom:8px;
+    display:block;
+  }
+  .field p{margin:0 0 10px;}
+  .field ul{margin:0; padding-left:20px; color:var(--ink-soft); font-size:15.5px;}
+  .field li{margin-bottom:6px;}
+  .refs{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    line-height:1.7;
+  }
+
+  @media (max-width: 860px){
+    .layout{grid-template-columns:1fr;}
+    nav.index{position:static; border-right:none; border-bottom:1px solid var(--line); padding:0 0 24px; margin-bottom:24px;}
+    main.entries{padding-left:0;}
+    .entry{padding:30px 24px;}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .intro-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="eyebrow">Professional Portfolio · Machine Learning Fundamentals</p>
+  <h1>Ajay Kumar Chavvakula</h1>
+  <p class="role">Java Full Stack Software Engineer — building toward applied AI/ML expertise</p>
+  <div class="meta-row">
+    <span><strong>Course</strong> — 3SU2026 Machine Learning Fundamentals (AIML‑500‑01N1Y)</span>
+    <span><strong>Institution</strong> — Indiana Wesleyan University</span>
+    <span><strong>Updated</strong> — July 2026</span>
+  </div>
+</header>
+
+<p class="purpose">
+  This portfolio collects the artifacts I'm building throughout AIML-500 — prototypes, research
+  practice, and reflections — organized the way they were produced: <strong>by workshop</strong>.
+  It's meant for my instructor and peers to see not just finished output, but the reasoning
+  and process behind it.
+</p>
+
+<div class="intro-grid">
+  <div class="intro-card">
+    <p class="index-label">Professional Bio</p>
+    <p>
+      I completed my Bachelor's in Computer Science Engineering in 2020, followed by a Master's
+      in Computer Science from <strong>Wright State University</strong> in May 2023. Since 2023 I've
+      worked as a <strong>Software Developer / Java Full Stack Engineer</strong>, building enterprise
+      applications across the <strong>banking, healthcare, and finance</strong> sectors — industries
+      where reliability, security, and compliance aren't optional.
+    </p>
+    <p>
+      I'm currently expanding into AI and machine learning through AIML-500, with the goal of
+      applying these concepts directly to the enterprise systems I build — smarter data pipelines,
+      applied ML features, and more responsible, explainable AI-driven tools.
+    </p>
+  </div>
+
+  <div class="intro-card">
+    <p class="index-label">Personal Value Proposition</p>
+    <p class="highlight">
+      "I bring production-grade full-stack engineering discipline from regulated industries to the
+      emerging world of applied AI."
+    </p>
+    <p>
+      Most people learning AI/ML today are starting from either pure theory or a research background.
+      I'm starting from the opposite direction: years of shipping real, audited, high-stakes software
+      in banking, healthcare, and finance. That means when I build with AI, I already think in terms of
+      data integrity, security, and responsible use by default — not as an afterthought.
+    </p>
+    <div class="chip-row">
+      <span>Java · Spring Boot</span><span>Full Stack Engineering</span><span>Banking</span>
+      <span>Healthcare</span><span>Finance</span><span>Applied AI/ML (in progress)</span>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <nav class="index">
+    <p class="index-label">Workshop Index</p>
+    <a class="tab active" href="#entry-01">
+      <span class="num">Entry 01 · Workshop 1</span>
+      <span class="name">AI Lab — Study Assistant Bot</span>
+      <span class="status">Complete</span>
+    </a>
+  </nav>
+
+  <main class="entries">
+
+    <section class="entry" id="entry-01" data-tag="Artifact 1">
+      <h2>AIML Study Assistant Bot</h2>
+      <p class="subline">AI LAB · GUIDED ACTIVITY · WORKSHOP 1 · JULY 2026</p>
+
+      <div class="field">
+        <span class="flabel">Introduction</span>
+        <p>
+          A browser-based AI study assistant built during the AIML-500 AI Lab, designed to help beginner
+          students connect AI/ML definitions to real examples and quiz-style practice — the gap I noticed
+          most first-time learners fall into.
+        </p>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Description</span>
+        <p>
+          The assistant explains core AI/ML concepts (AI vs. ML, supervised/unsupervised/reinforcement
+          learning, neural networks), builds short study plans on request, generates quiz-style practice
+          questions with explanations, and covers responsible-AI topics like bias and fairness. It also
+          deliberately redirects "do my assignment for me" requests back toward learning rather than
+          answering them outright.
+        </p>
+        <div class="demo-frame">
+          <div class="demo-label"><span class="dot"></span> Live Prototype — try asking it something</div>
+          <iframe id="botFrame" title="AIML Study Assistant Bot live demo"></iframe>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Objective</span>
+        <p>
+          To practice using generative AI tools and a structured design-thinking process to build a real,
+          working AI product — and to give beginner AIML-500 students a low-stakes way to check their own
+          understanding of course concepts before quizzes.
+        </p>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Process</span>
+        <div class="steps">
+          <div class="step"><div class="k">Empathy</div><div class="v">Beginners feel overwhelmed by AI/ML jargon</div></div>
+          <div class="step"><div class="k">Define</div><div class="v">Need clear explanations + quiz practice</div></div>
+          <div class="step"><div class="k">Ideate</div><div class="v">Chose a combined study assistant</div></div>
+          <div class="step"><div class="k">Prototype</div><div class="v">Built local HTML/JS chatbot</div></div>
+          <div class="step"><div class="k">Test</div><div class="v">6 scenarios, all passed</div></div>
+        </div>
+        <p>
+          I started by testing the same study-plan prompt across three separate AI chats to compare
+          organization and depth, then practiced iterating on a GPT-style assistant — asking it to revise,
+          simplify, justify its structure, and handle a "what if" scenario. That iteration process directly
+          shaped the bot's tone and scope before I wrote a single line of code. I then built the prototype in
+          vanilla HTML/CSS/JavaScript and tested it against six scenarios (concept explanations, quiz
+          generation, ethics questions, and an out-of-scope request) — all passed, after which I added quick-
+          reply buttons and a fallback response for unrecognized questions.
+        </p>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Tools and Technologies Used</span>
+        <div class="tags">
+          <span>HTML / CSS / JavaScript</span><span>ChatGPT (concept design + drafting)</span>
+          <span>Design Thinking Framework</span><span>Browser-based prototyping</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Value Proposition</span>
+        <p>
+          This artifact shows I can take an ambiguous brief ("build an AI assistant"), scope it to a real
+          user need through design thinking, and ship a working, tested product — not just a written plan.
+          It also shows I treat responsible AI use as a design requirement, not an afterthought.
+        </p>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Unique Value</span>
+        <p>
+          Unlike a purely academic exercise, I approached this with the habits of a working full-stack
+          engineer: define the scope, test against concrete scenarios, and iterate based on results. Coming
+          from banking, healthcare, and finance — industries where an AI tool that gives a wrong or unsafe
+          answer has real consequences — I built in guardrails (no private data, no completed-assignment
+          answers) by default rather than adding them only after a problem surfaced.
+        </p>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Relevance</span>
+        <p>
+          Directly relevant to where I'm headed professionally: applying AI/ML capabilities inside the kind
+          of enterprise, regulated systems I already build as a Java full-stack engineer. This project is a
+          small-scale proof that I can identify a user problem, apply responsible-AI thinking, and deliver a
+          working tool — the same skill set, at a larger scale, that banking and healthcare employers need
+          from AI-literate engineers.
+        </p>
+      </div>
+
+      <div class="field">
+        <span class="flabel">References</span>
+        <p class="refs">
+          Indiana Wesleyan University. (2026). AI Lab: AIML-500 guided activities [Course handout].<br>
+          OpenAI. (2026). ChatGPT [Large language model].
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span>© 2026 Ajay Kumar Chavvakula · AIML-500 Portfolio</span>
+  <span>Built for instructor &amp; peer review · Indiana Wesleyan University</span>
+</footer>
+
+<script id="bot-source-b64" type="text/plain">PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04IiAvPgo8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCIgLz4KPHRpdGxlPkFJTUwgU3R1ZHkgQXNzaXN0YW50IEJvdDwvdGl0bGU+CjxzdHlsZT4KICA6cm9vdCB7IC0tcmVkOiM5YjEyMzA7IC0tZGFyazojMjAyMDJhOyAtLWxpZ2h0OiNmN2Y3ZmI7IC0tY2FyZDojZmZmZmZmOyAtLW11dGVkOiM2YjcyODA7IH0KICAqIHsgYm94LXNpemluZzogYm9yZGVyLWJveDsgfQogIGJvZHkgeyBtYXJnaW46MDsgZm9udC1mYW1pbHk6IEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7IGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMzVkZWcsICNmN2Y3ZmIsICNlY2VjZjMpOyBjb2xvcjogdmFyKC0tZGFyayk7IH0KICBoZWFkZXIgeyBiYWNrZ3JvdW5kOiB2YXIoLS1yZWQpOyBjb2xvcjogd2hpdGU7IHBhZGRpbmc6IDIycHggMjhweDsgYm94LXNoYWRvdzogMCAzcHggMTJweCByZ2JhKDAsMCwwLC4xOCk7IH0KICBoZWFkZXIgaDEgeyBtYXJnaW46MDsgZm9udC1zaXplOiAzMHB4OyBsZXR0ZXItc3BhY2luZzouM3B4OyB9CiAgaGVhZGVyIHAgeyBtYXJnaW46NnB4IDAgMDsgb3BhY2l0eTouOTQ7IH0KICAubGF5b3V0IHsgZGlzcGxheTpncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDM0MHB4IDFmcjsgZ2FwOjIycHg7IHBhZGRpbmc6MjJweDsgbWF4LXdpZHRoOiAxMjgwcHg7IG1hcmdpbjogMCBhdXRvOyB9CiAgLnBhbmVsLCAuY2hhdCB7IGJhY2tncm91bmQ6IHZhcigtLWNhcmQpOyBib3JkZXItcmFkaXVzOjE4cHg7IGJveC1zaGFkb3c6IDAgNXB4IDIwcHggcmdiYSgwLDAsMCwuMDgpOyBib3JkZXI6IDFweCBzb2xpZCAjZTVlN2ViOyB9CiAgLnBhbmVsIHsgcGFkZGluZzoyMHB4OyB9CiAgLnBhbmVsIGgyIHsgbWFyZ2luOiAwIDAgMTJweDsgY29sb3I6IHZhcigtLXJlZCk7IGZvbnQtc2l6ZTogMjBweDsgfQogIC5wYW5lbCBoMyB7IG1hcmdpbjogMThweCAwIDhweDsgZm9udC1zaXplOiAxNXB4OyB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlOyBjb2xvcjojMzc0MTUxOyB9CiAgLnBhbmVsIHAsIC5wYW5lbCBsaSB7IGZvbnQtc2l6ZTogMTRweDsgbGluZS1oZWlnaHQ6MS40NTsgfQogIC5wYW5lbCB1bCB7IHBhZGRpbmctbGVmdDoxOHB4OyBtYXJnaW46OHB4IDA7IH0KICAuYmFkZ2UgeyBkaXNwbGF5OmlubGluZS1ibG9jazsgYmFja2dyb3VuZDojZjNlNGU5OyBjb2xvcjp2YXIoLS1yZWQpOyBwYWRkaW5nOiA0cHggOXB4OyBib3JkZXItcmFkaXVzOjk5OXB4OyBmb250LXNpemU6MTJweDsgZm9udC13ZWlnaHQ6Ym9sZDsgbWFyZ2luOjNweCAzcHggM3B4IDA7IH0KICAuY2hhdCB7IGRpc3BsYXk6ZmxleDsgZmxleC1kaXJlY3Rpb246Y29sdW1uOyBtaW4taGVpZ2h0OjcyMHB4OyBvdmVyZmxvdzpoaWRkZW47IH0KICAuY2hhdFRvcCB7IHBhZGRpbmc6MThweCAyMHB4OyBib3JkZXItYm90dG9tOjFweCBzb2xpZCAjZTVlN2ViOyBkaXNwbGF5OmZsZXg7IGp1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVuOyBhbGlnbi1pdGVtczpjZW50ZXI7IGdhcDoxMHB4OyB9CiAgLmNoYXRUb3AgaDIgeyBtYXJnaW46MDsgY29sb3I6dmFyKC0tcmVkKTsgZm9udC1zaXplOjIycHg7IH0KICAuc3RhdHVzIHsgZm9udC1zaXplOjEzcHg7IGNvbG9yOiMxNTgwM2Q7IGZvbnQtd2VpZ2h0OmJvbGQ7IH0KICAjbWVzc2FnZXMgeyBmbGV4OjE7IHBhZGRpbmc6MjBweDsgb3ZlcmZsb3c6YXV0bzsgYmFja2dyb3VuZDojZmFmYWZhOyB9CiAgLm1zZyB7IG1heC13aWR0aDo4MiU7IHBhZGRpbmc6MTNweCAxNXB4OyBib3JkZXItcmFkaXVzOjE1cHg7IG1hcmdpbjoxMHB4IDA7IGxpbmUtaGVpZ2h0OjEuNDU7IGZvbnQtc2l6ZToxNXB4OyB3aGl0ZS1zcGFjZTpwcmUtbGluZTsgfQogIC5ib3QgeyBiYWNrZ3JvdW5kOndoaXRlOyBib3JkZXI6MXB4IHNvbGlkICNlNWU3ZWI7IH0KICAudXNlciB7IG1hcmdpbi1sZWZ0OmF1dG87IGJhY2tncm91bmQ6IzliMTIzMDsgY29sb3I6d2hpdGU7IH0KICAucXVpY2sgeyBkaXNwbGF5OmZsZXg7IGZsZXgtd3JhcDp3cmFwOyBnYXA6OHB4OyBwYWRkaW5nOjE0cHggMjBweDsgYm9yZGVyLXRvcDoxcHggc29saWQgI2U1ZTdlYjsgYmFja2dyb3VuZDojZmZmOyB9CiAgLnF1aWNrIGJ1dHRvbiB7IGJvcmRlcjoxcHggc29saWQgI2QxZDVkYjsgYmFja2dyb3VuZDp3aGl0ZTsgY29sb3I6IzM3NDE1MTsgcGFkZGluZzo4cHggMTFweDsgYm9yZGVyLXJhZGl1czo5OTlweDsgY3Vyc29yOnBvaW50ZXI7IGZvbnQtc2l6ZToxM3B4OyB9CiAgLnF1aWNrIGJ1dHRvbjpob3ZlciB7IGJhY2tncm91bmQ6I2YzZjRmNjsgfQogIC5pbnB1dCB7IGRpc3BsYXk6ZmxleDsgZ2FwOjEwcHg7IHBhZGRpbmc6MTZweCAyMHB4IDIwcHg7IGJvcmRlci10b3A6MXB4IHNvbGlkICNlNWU3ZWI7IGJhY2tncm91bmQ6d2hpdGU7IH0KICBpbnB1dCB7IGZsZXg6MTsgYm9yZGVyOjFweCBzb2xpZCAjZDFkNWRiOyBib3JkZXItcmFkaXVzOjEycHg7IHBhZGRpbmc6MTNweCAxNHB4OyBmb250LXNpemU6MTVweDsgfQogIC5zZW5kIHsgYm9yZGVyOm5vbmU7IGJhY2tncm91bmQ6dmFyKC0tcmVkKTsgY29sb3I6d2hpdGU7IHBhZGRpbmc6MCAyMHB4OyBib3JkZXItcmFkaXVzOjEycHg7IGZvbnQtd2VpZ2h0OmJvbGQ7IGN1cnNvcjpwb2ludGVyOyB9CiAgLnNlbmQ6aG92ZXIgeyBmaWx0ZXI6YnJpZ2h0bmVzcyguOTUpOyB9CiAgZm9vdGVyIHsgdGV4dC1hbGlnbjpjZW50ZXI7IHBhZGRpbmc6IDhweCAyMHB4IDI2cHg7IGNvbG9yOnZhcigtLW11dGVkKTsgZm9udC1zaXplOjEzcHg7IH0KICBAbWVkaWEgKG1heC13aWR0aDogOTAwcHgpIHsgLmxheW91dCB7IGdyaWQtdGVtcGxhdGUtY29sdW1uczoxZnI7IH0gLmNoYXQgeyBtaW4taGVpZ2h0OjY1MHB4OyB9IH0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KPGhlYWRlcj4KICA8aDE+QUlNTCBTdHVkeSBBc3Npc3RhbnQgQm90PC9oMT4KICA8cD5Qcm90b3R5cGUgQUkgYXNzaXN0YW50IGZvciBNYWNoaW5lIExlYXJuaW5nIEZ1bmRhbWVudGFscyBzdHVkZW50czwvcD4KPC9oZWFkZXI+CjxtYWluIGNsYXNzPSJsYXlvdXQiPgogIDxhc2lkZSBjbGFzcz0icGFuZWwiPgogICAgPGgyPkJvdCBPYmplY3RpdmU8L2gyPgogICAgPHA+VGhpcyBhc3Npc3RhbnQgaGVscHMgYmVnaW5uZXIgQUlNTC01MDAgc3R1ZGVudHMgdW5kZXJzdGFuZCBBSS9NTCB0ZXJtcywgcHJlcGFyZSBmb3IgcXVpenplcywgYW5kIGNyZWF0ZSBzaG9ydCBzdHVkeSBwbGFucy48L3A+CiAgICA8aDM+S25vd2xlZGdlIEFyZWFzPC9oMz4KICAgIDxzcGFuIGNsYXNzPSJiYWRnZSI+QUkgdnMgTUw8L3NwYW4+PHNwYW4gY2xhc3M9ImJhZGdlIj5TdXBlcnZpc2VkIExlYXJuaW5nPC9zcGFuPjxzcGFuIGNsYXNzPSJiYWRnZSI+VW5zdXBlcnZpc2VkIExlYXJuaW5nPC9zcGFuPjxzcGFuIGNsYXNzPSJiYWRnZSI+UmVpbmZvcmNlbWVudCBMZWFybmluZzwvc3Bhbj48c3BhbiBjbGFzcz0iYmFkZ2UiPkV0aGljczwvc3Bhbj48c3BhbiBjbGFzcz0iYmFkZ2UiPlN0dWR5IFBsYW5zPC9zcGFuPgogICAgPGgzPlJlc3BvbnNpYmxlIFVzZSBSdWxlczwvaDM+CiAgICA8dWw+CiAgICAgIDxsaT5EbyBub3QgZW50ZXIgcHJpdmF0ZSBwZXJzb25hbCBkYXRhLjwvbGk+CiAgICAgIDxsaT5Vc2UgcmVzcG9uc2VzIGZvciBsZWFybmluZywgbm90IGNvcHktcGFzdGUgY2hlYXRpbmcuPC9saT4KICAgICAgPGxpPlZlcmlmeSBpbXBvcnRhbnQgZmFjdHMgd2l0aCBjb3Vyc2UgbWF0ZXJpYWxzLjwvbGk+CiAgICAgIDxsaT5UaGUgYm90IGdpdmVzIGJlZ2lubmVyLWZyaWVuZGx5IGd1aWRhbmNlLCBub3QgcHJvZmVzc2lvbmFsIGFkdmljZS48L2xpPgogICAgPC91bD4KICAgIDxoMz5EZXNpZ24gVGhpbmtpbmc8L2gzPgogICAgPHA+PHN0cm9uZz5FbXBhdGh5Ojwvc3Ryb25nPiBTdHVkZW50cyBuZWVkIHNpbXBsZSBleHBsYW5hdGlvbnMuPGJyPgogICAgPHN0cm9uZz5EZWZpbmU6PC9zdHJvbmc+IEFJL01MIGNvbmNlcHRzIGNhbiBmZWVsIGNvbmZ1c2luZy48YnI+CiAgICA8c3Ryb25nPklkZWF0ZTo8L3N0cm9uZz4gQnVpbGQgYSBzdHVkeSBoZWxwZXIuPGJyPgogICAgPHN0cm9uZz5Qcm90b3R5cGU6PC9zdHJvbmc+IEhUTUwvSmF2YVNjcmlwdCBjaGF0Ym90Ljxicj4KICAgIDxzdHJvbmc+VGVzdDo8L3N0cm9uZz4gVHJ5IGNvbW1vbiBzdHVkZW50IHF1ZXN0aW9ucy48L3A+CiAgPC9hc2lkZT4KCiAgPHNlY3Rpb24gY2xhc3M9ImNoYXQiPgogICAgPGRpdiBjbGFzcz0iY2hhdFRvcCI+CiAgICAgIDxoMj5DaGF0IHdpdGggdGhlIEFzc2lzdGFudDwvaDI+CiAgICAgIDxzcGFuIGNsYXNzPSJzdGF0dXMiPkxvY2FsIHByb3RvdHlwZSAtIG5vIGxvZ2luIHJlcXVpcmVkPC9zcGFuPgogICAgPC9kaXY+CiAgICA8ZGl2IGlkPSJtZXNzYWdlcyI+CiAgICAgIDxkaXYgY2xhc3M9Im1zZyBib3QiPkhlbGxvISBJIGFtIHlvdXIgQUlNTCBTdHVkeSBBc3Npc3RhbnQuIEFzayBtZSBhYm91dCBBSSwgbWFjaGluZSBsZWFybmluZywgc3VwZXJ2aXNlZCBsZWFybmluZywgdW5zdXBlcnZpc2VkIGxlYXJuaW5nLCByZWluZm9yY2VtZW50IGxlYXJuaW5nLCBuZXVyYWwgbmV0d29ya3MsIGV0aGljcywgb3Igc3R1ZHkgcGxhbm5pbmcuPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9Im1zZyB1c2VyIj5XaGF0IGlzIHN1cGVydmlzZWQgbGVhcm5pbmc/PC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9Im1zZyBib3QiPlN1cGVydmlzZWQgbGVhcm5pbmcgaXMgYSBtYWNoaW5lIGxlYXJuaW5nIG1ldGhvZCB3aGVyZSB0aGUgbW9kZWwgbGVhcm5zIGZyb20gbGFiZWxlZCBleGFtcGxlcy4gRm9yIGV4YW1wbGUsIGlmIGEgZGF0YXNldCBpbmNsdWRlcyBob3VzZSBmZWF0dXJlcyBhbmQgdGhlIGNvcnJlY3QgaG91c2UgcHJpY2VzLCB0aGUgbW9kZWwgbGVhcm5zIHRvIHByZWRpY3QgcHJpY2VzIGZvciBuZXcgaG91c2VzLjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJtc2cgdXNlciI+UXVpeiBtZTwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJtc2cgYm90Ij5RdWVzdGlvbjogV2hpY2ggdHlwZSBvZiBtYWNoaW5lIGxlYXJuaW5nIHVzZXMgbGFiZWxlZCBkYXRhPwpBKSBVbnN1cGVydmlzZWQgbGVhcm5pbmcKQikgU3VwZXJ2aXNlZCBsZWFybmluZwpDKSBSZWluZm9yY2VtZW50IGxlYXJuaW5nClR5cGUgeW91ciBhbnN3ZXIgYW5kIEkgd2lsbCBleHBsYWluIGl0LjwvZGl2PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJxdWljayI+CiAgICAgIDxidXR0b24gb25jbGljaz0icXVpY2soJ0V4cGxhaW4gQUkgdnMgTUwnKSI+QUkgdnMgTUw8L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJxdWljaygnQ3JlYXRlIGEgc3R1ZHkgcGxhbicpIj5TdHVkeSBwbGFuPC9idXR0b24+CiAgICAgIDxidXR0b24gb25jbGljaz0icXVpY2soJ1F1aXogbWUnKSI+UXVpeiBtZTwvYnV0dG9uPgogICAgICA8YnV0dG9uIG9uY2xpY2s9InF1aWNrKCdXaGF0IGlzIGJpYXMgaW4gQUk/JykiPkFJIGV0aGljczwvYnV0dG9uPgogICAgICA8YnV0dG9uIG9uY2xpY2s9InF1aWNrKCdFeHBsYWluIHJlaW5mb3JjZW1lbnQgbGVhcm5pbmcnKSI+UmVpbmZvcmNlbWVudCBsZWFybmluZzwvYnV0dG9uPgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJpbnB1dCI+CiAgICAgIDxpbnB1dCBpZD0idXNlcklucHV0IiBwbGFjZWhvbGRlcj0iVHlwZSB5b3VyIHF1ZXN0aW9uIGhlcmUuLi4iIG9ua2V5ZG93bj0iaWYoZXZlbnQua2V5PT09J0VudGVyJyl7c2VuZCgpfSIgLz4KICAgICAgPGJ1dHRvbiBjbGFzcz0ic2VuZCIgb25jbGljaz0ic2VuZCgpIj5TZW5kPC9idXR0b24+CiAgICA8L2Rpdj4KICA8L3NlY3Rpb24+CjwvbWFpbj4KPGZvb3Rlcj5DcmVhdGVkIGZvciBBSU1MLTUwMCBBSSBMYWIgfCBTdHVkZW50IHByb3RvdHlwZSBldmlkZW5jZSBmaWxlPC9mb290ZXI+CjxzY3JpcHQ+CmNvbnN0IG1lc3NhZ2VzID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ21lc3NhZ2VzJyk7CmNvbnN0IGlucHV0ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3VzZXJJbnB1dCcpOwpmdW5jdGlvbiBhZGQodGV4dCwgd2hvKXsKICBjb25zdCBkaXYgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsKICBkaXYuY2xhc3NOYW1lID0gJ21zZyAnICsgd2hvOwogIGRpdi50ZXh0Q29udGVudCA9IHRleHQ7CiAgbWVzc2FnZXMuYXBwZW5kQ2hpbGQoZGl2KTsKICBtZXNzYWdlcy5zY3JvbGxUb3AgPSBtZXNzYWdlcy5zY3JvbGxIZWlnaHQ7Cn0KZnVuY3Rpb24gcXVpY2sodGV4dCl7IGlucHV0LnZhbHVlID0gdGV4dDsgc2VuZCgpOyB9CmZ1bmN0aW9uIHNlbmQoKXsKICBjb25zdCB0ZXh0ID0gaW5wdXQudmFsdWUudHJpbSgpOwogIGlmKCF0ZXh0KSByZXR1cm47CiAgYWRkKHRleHQsICd1c2VyJyk7CiAgaW5wdXQudmFsdWUgPSAnJzsKICBzZXRUaW1lb3V0KCgpPT4gYWRkKHJlcGx5KHRleHQpLCAnYm90JyksIDI1MCk7Cn0KZnVuY3Rpb24gcmVwbHkodCl7CiAgY29uc3QgcSA9IHQudG9Mb3dlckNhc2UoKTsKICBpZihxLmluY2x1ZGVzKCdhaSB2cycpIHx8IChxLmluY2x1ZGVzKCdhcnRpZmljaWFsIGludGVsbGlnZW5jZScpICYmIHEuaW5jbHVkZXMoJ21hY2hpbmUgbGVhcm5pbmcnKSkpIHJldHVybiAnQUkgaXMgdGhlIGJyb2FkZXIgZmllbGQgb2YgbWFraW5nIG1hY2hpbmVzIHBlcmZvcm0gdGFza3MgdGhhdCBub3JtYWxseSByZXF1aXJlIGh1bWFuIGludGVsbGlnZW5jZS4gTWFjaGluZSBsZWFybmluZyBpcyBhIHN1YnNldCBvZiBBSSB3aGVyZSBzeXN0ZW1zIGxlYXJuIHBhdHRlcm5zIGZyb20gZGF0YSBpbnN0ZWFkIG9mIGJlaW5nIHByb2dyYW1tZWQgZm9yIGV2ZXJ5IHJ1bGUuJzsKICBpZihxLmluY2x1ZGVzKCdzdXBlcnZpc2VkJykpIHJldHVybiAnU3VwZXJ2aXNlZCBsZWFybmluZyB1c2VzIGxhYmVsZWQgZGF0YS4gVGhlIG1vZGVsIGxlYXJucyBmcm9tIGV4YW1wbGVzIHRoYXQgaW5jbHVkZSBib3RoIGlucHV0IGFuZCBjb3JyZWN0IG91dHB1dCwgc3VjaCBhcyBlbWFpbHMgbGFiZWxlZCBzcGFtL25vdCBzcGFtIG9yIGltYWdlcyBsYWJlbGVkIGNhdC9kb2cuJzsKICBpZihxLmluY2x1ZGVzKCd1bnN1cGVydmlzZWQnKSkgcmV0dXJuICdVbnN1cGVydmlzZWQgbGVhcm5pbmcgdXNlcyB1bmxhYmVsZWQgZGF0YS4gVGhlIG1vZGVsIGxvb2tzIGZvciBoaWRkZW4gcGF0dGVybnMsIHN1Y2ggYXMgZ3JvdXBpbmcgY3VzdG9tZXJzIGJ5IGJlaGF2aW9yIG9yIGZpbmRpbmcgY2x1c3RlcnMgaW4gZGF0YS4nOwogIGlmKHEuaW5jbHVkZXMoJ3JlaW5mb3JjZW1lbnQnKSkgcmV0dXJuICdSZWluZm9yY2VtZW50IGxlYXJuaW5nIHRyYWlucyBhbiBhZ2VudCB0aHJvdWdoIHJld2FyZHMgYW5kIHBlbmFsdGllcy4gQSBnb29kIGV4YW1wbGUgaXMgYSBnYW1lLXBsYXlpbmcgQUkgdGhhdCBpbXByb3ZlcyBieSBsZWFybmluZyB3aGljaCBhY3Rpb25zIGxlYWQgdG8gYmV0dGVyIHNjb3Jlcy4nOwogIGlmKHEuaW5jbHVkZXMoJ25ldXJhbCcpIHx8IHEuaW5jbHVkZXMoJ2RlZXAgbGVhcm5pbmcnKSkgcmV0dXJuICdBIG5ldXJhbCBuZXR3b3JrIGlzIGEgbW9kZWwgaW5zcGlyZWQgYnkgdGhlIGJyYWluLiBEZWVwIGxlYXJuaW5nIHVzZXMgbWFueSBsYXllcnMgb2YgbmV1cmFsIG5ldHdvcmtzIHRvIHJlY29nbml6ZSBjb21wbGV4IHBhdHRlcm5zIGluIGltYWdlcywgdGV4dCwgYXVkaW8sIGFuZCBvdGhlciBkYXRhLic7CiAgaWYocS5pbmNsdWRlcygnYmlhcycpIHx8IHEuaW5jbHVkZXMoJ2V0aGljJykgfHwgcS5pbmNsdWRlcygncHJpdmFjeScpIHx8IHEuaW5jbHVkZXMoJ2ZhaXInKSkgcmV0dXJuICdBSSBldGhpY3MgZm9jdXNlcyBvbiBmYWlybmVzcywgdHJhbnNwYXJlbmN5LCBwcml2YWN5LCBhY2NvdW50YWJpbGl0eSwgYW5kIGF2b2lkaW5nIGJpYXMuIEEgbW9kZWwgY2FuIGJlY29tZSB1bmZhaXIgaWYgaXRzIHRyYWluaW5nIGRhdGEgcmVmbGVjdHMgcmVhbC13b3JsZCBiaWFzIG9yIGV4Y2x1ZGVzIGNlcnRhaW4gZ3JvdXBzLic7CiAgaWYocS5pbmNsdWRlcygnc3R1ZHkgcGxhbicpIHx8IHEuaW5jbHVkZXMoJ3ByZXBhcmUnKSB8fCBxLmluY2x1ZGVzKCdwbGFuJykpIHJldHVybiAnVGhyZWUtZGF5IEFJTUwgc3R1ZHkgcGxhbjpcbkRheSAxOiBSZXZpZXcgQUkgdnMgTUwsIHN1cGVydmlzZWQsIHVuc3VwZXJ2aXNlZCwgYW5kIHJlaW5mb3JjZW1lbnQgbGVhcm5pbmcuXG5EYXkgMjogU3R1ZHkgYXBwbGljYXRpb25zIHN1Y2ggYXMgdmlzaW9uLCBsYW5ndWFnZSwgcm9ib3RpY3MsIGFuZCBidXNpbmVzcyBhbmFseXRpY3MuXG5EYXkgMzogUmV2aWV3IGV0aGljcywgYmlhcywgcHJpdmFjeSwgYW5kIHF1aXogeW91cnNlbGYgd2l0aCBkZWZpbml0aW9ucyBhbmQgZXhhbXBsZXMuJzsKICBpZihxLmluY2x1ZGVzKCdxdWl6JykpIHJldHVybiAnUXVlc3Rpb246IFdoYXQgdHlwZSBvZiBNTCBncm91cHMgdW5sYWJlbGVkIGRhdGEgaW50byBwYXR0ZXJucyBvciBjbHVzdGVycz9cbkEpIFN1cGVydmlzZWQgbGVhcm5pbmdcbkIpIFVuc3VwZXJ2aXNlZCBsZWFybmluZ1xuQykgUmVpbmZvcmNlbWVudCBsZWFybmluZ1xuQ29ycmVjdCBhbnN3ZXI6IEIsIGJlY2F1c2UgdW5zdXBlcnZpc2VkIGxlYXJuaW5nIGZpbmRzIHBhdHRlcm5zIHdpdGhvdXQgbGFiZWxlZCBhbnN3ZXJzLic7CiAgaWYocS5pbmNsdWRlcygndHVyaW5nJykpIHJldHVybiAnQWxhbiBUdXJpbmcgcHJvcG9zZWQgdGhlIEltaXRhdGlvbiBHYW1lLCBub3cga25vd24gYXMgdGhlIFR1cmluZyBUZXN0LCB0byBleHBsb3JlIHdoZXRoZXIgYSBtYWNoaW5lIGNvdWxkIGltaXRhdGUgaW50ZWxsaWdlbnQgaHVtYW4gY29udmVyc2F0aW9uLic7CiAgaWYocS5pbmNsdWRlcygnYWxleG5ldCcpIHx8IHEuaW5jbHVkZXMoJzIwMTInKSkgcmV0dXJuICdBbGV4TmV0IHdhcyBhIG1ham9yIDIwMTIgZGVlcCBsZWFybmluZyBicmVha3Rocm91Z2ggaW4gaW1hZ2UgcmVjb2duaXRpb24uIEl0IHNob3dlZCB0aGUgcG93ZXIgb2YgbmV1cmFsIG5ldHdvcmtzIHN1cHBvcnRlZCBieSBHUFUgY29tcHV0aW5nLic7CiAgaWYocS5pbmNsdWRlcygnYW5zd2VyIG15IGFzc2lnbm1lbnQnKSB8fCBxLmluY2x1ZGVzKCdkbyBteSBhc3NpZ25tZW50JykpIHJldHVybiAnSSBjYW4gaGVscCB5b3UgdW5kZXJzdGFuZCB0aGUgdGFzaywgYnJhaW5zdG9ybSwgb3V0bGluZSwgYW5kIHJldmlzZSwgYnV0IHlvdSBzaG91bGQgc3RpbGwgcmV2aWV3IGFuZCBwZXJzb25hbGl6ZSB0aGUgZmluYWwgd29yayBzbyBpdCByZWZsZWN0cyB5b3VyIG93biBsZWFybmluZy4nOwogIHJldHVybiAnSSBhbSBmb2N1c2VkIG9uIEFJTUwtNTAwIHRvcGljcy4gVHJ5IGFza2luZzog4oCcRXhwbGFpbiBBSSB2cyBNTCzigJ0g4oCcV2hhdCBpcyBzdXBlcnZpc2VkIGxlYXJuaW5nP+KAnSwg4oCcUXVpeiBtZSzigJ0g4oCcQ3JlYXRlIGEgc3R1ZHkgcGxhbizigJ0gb3Ig4oCcV2hhdCBpcyBiaWFzIGluIEFJP+KAnSc7Cn0KPC9zY3JpcHQ+CjwvYm9keT4KPC9odG1sPgo=</script>
+<script>
+  const b64 = document.getElementById('bot-source-b64').textContent.trim();
+  const decoded = decodeURIComponent(escape(atob(b64)));
+  document.getElementById('botFrame').srcdoc = decoded;
+</script>
+
+</body>
+</html>
